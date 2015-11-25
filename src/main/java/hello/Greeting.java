@@ -9,10 +9,12 @@ public class Greeting {
         this.content = content;
     }
 
+    //    @ApiModelProperty(position = 1, required = true, value = "User Id")
     public long getId() {
         return id;
     }
 
+    //    @ApiModelProperty(position = 2, required = true)
     public String getContent() {
         return content;
     }

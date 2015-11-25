@@ -1,5 +1,8 @@
 package hello;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,11 @@ public class GreetingController {
         this.repository = repository;
     }
 
+    @ApiOperation(value = "Returns user greeting", notes = "Returns a greeting for the user.", response = Greeting.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of user detail", response = Greeting.class),
+            @ApiResponse(code = 404, message = "User with given username does not exist")}
+    )
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = useDefaultValue) String name)
             throws RuntimeException {
@@ -45,6 +53,5 @@ public class GreetingController {
 }
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such Customer")
-        // 404
 class CustomerNotFoundException extends RuntimeException {
 }
